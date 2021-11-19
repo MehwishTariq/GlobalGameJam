@@ -6,59 +6,41 @@ public class ArcCreator : MonoBehaviour
 {
     LineRenderer lr;
 
-    [Range(5,10)]
-    public float velocity;
-    [Range(45, 80)]
-    public float angle;
-    public int resolution;
-
     float g; //force of gravity on the y axis
-    float radianAngle;
+    StoneMovement stoneMove;
+    
+    // Number of points on the line
+    public int numPoints = 10;
+
+    // distance between those points on the line
+    public float timeBetweenPoints = 0.1f;
+
+    // The physics layers that will cause the line to stop being drawn
+    public LayerMask CollidableLayers;
 
     private void Awake()
     {
         lr = GetComponent<LineRenderer>();
+        stoneMove = GetComponent<StoneMovement>();
         g = Mathf.Abs(Physics2D.gravity.y);
     }
 
-    private void OnValidate()
+
+    private void Update()
     {
-        if (lr != null && Application.isPlaying)
+        lr.positionCount = (int)numPoints;
+        List<Vector3> points = new List<Vector3>();
+        Vector3 startingPosition = stoneMove.ShotPoint.position;
+        Vector3 startingVelocity = stoneMove.ShotPoint.right * stoneMove.BlastPower;
+        for (float t = 0; t < numPoints; t += timeBetweenPoints)
         {
-            RenderArc();
-        }
-    }
-
-    
-    //initialization
-    public void RenderArc()
-    {
-        // obsolete: lr.SetVertexCount(resolution + 1);
-        lr.positionCount = resolution + 1;
-        lr.SetPositions(CalculateArcArray());
-    }
-    //Create an array of Vector 3 positions for the arc
-    Vector3[] CalculateArcArray()
-    {
-        Vector3[] arcArray = new Vector3[resolution + 1];
-
-        radianAngle = Mathf.Deg2Rad * angle;
-        float maxDistance = (velocity * velocity * Mathf.Sin(2 * radianAngle)) / g;
-
-        for (int i = 0; i <= resolution; i++)
-        {
-            float t = (float)i / (float)resolution;
-            arcArray[i] = CalculateArcPoint(t, maxDistance);
+            Vector3 newPoint = startingPosition + t * startingVelocity;
+            newPoint.y = startingPosition.y + startingVelocity.y * t + Physics2D.gravity.y / 2f * t * t;
+            points.Add(newPoint);
+           
         }
 
-        return arcArray;
+        lr.SetPositions(points.ToArray());
     }
-
-    Vector3 CalculateArcPoint(float t, float maxDistance)
-    {
-        float x = t * maxDistance;
-        float y = x * Mathf.Tan(radianAngle) - ((g * x * x) / (2 * velocity * velocity * Mathf.Cos(radianAngle) * Mathf.Cos(radianAngle)));
-        return new Vector3(x, y);
-    }
-
+  
 }
