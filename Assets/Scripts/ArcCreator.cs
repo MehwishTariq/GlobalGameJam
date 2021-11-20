@@ -5,6 +5,7 @@ using UnityEngine;
 public class ArcCreator : MonoBehaviour
 {
     LineRenderer lr;
+    GameObject player;
 
     float g; //force of gravity on the y axis
     StoneMovement stoneMove;
@@ -18,8 +19,12 @@ public class ArcCreator : MonoBehaviour
     // The physics layers that will cause the line to stop being drawn
     public LayerMask CollidableLayers;
 
+    //direction
+    public Vector3 Dir;
+
     private void Awake()
     {
+        player = GameObject.FindWithTag("Player");
         lr = GetComponent<LineRenderer>();
         stoneMove = GetComponent<StoneMovement>();
         g = Mathf.Abs(Physics2D.gravity.y);
@@ -28,19 +33,34 @@ public class ArcCreator : MonoBehaviour
 
     private void Update()
     {
-        lr.positionCount = (int)numPoints;
+        if (GetComponentInParent<PlayerMovement>().StopMovement)
+        {
+            return;
+        }
         List<Vector3> points = new List<Vector3>();
         Vector3 startingPosition = stoneMove.ShotPoint.position;
-        Vector3 startingVelocity = stoneMove.ShotPoint.right * stoneMove.BlastPower;
-        for (float t = 0; t < numPoints; t += timeBetweenPoints)
+        //Vector3 startingVelocity = stoneMove.ShotPoint.forward * stoneMove.BlastPower;
+        Plane p = new Plane(Vector3.up, 0f);
+        float Dist;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (p.Raycast(ray, out Dist) && Input.GetMouseButton(1))
         {
-            Vector3 newPoint = startingPosition + t * startingVelocity;
-            newPoint.y = startingPosition.y + startingVelocity.y * t + Physics2D.gravity.y / 2f * t * t;
-            points.Add(newPoint);
-           
-        }
+            lr.positionCount = (int)numPoints;
+            Dir = ray.GetPoint(Dist) - player.transform.position;
+            Vector3 startingVelocity = Dir * stoneMove.BlastPower;
+            for (float t = 0; t < numPoints; t += timeBetweenPoints)
+            {
+                Vector3 newPoint = startingPosition + t * startingVelocity;
+                newPoint.y = startingPosition.y + startingVelocity.y * t + Physics2D.gravity.y / 2 * t * t;
+                points.Add(newPoint);
 
-        lr.SetPositions(points.ToArray());
+            }
+            lr.SetPositions(points.ToArray());
+        }
+        else
+        {
+            lr.positionCount = 0;
+        }
     }
   
 }

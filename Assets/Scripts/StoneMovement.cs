@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class StoneMovement : MonoBehaviour
 {
+    public Animator anim;
     public float rotationSpeed = 1;
     public float BlastPower = 5;
 
@@ -12,23 +13,32 @@ public class StoneMovement : MonoBehaviour
 
     void Update()
     {
-       
-        if (Input.GetMouseButton(0))
+        if(GetComponentInParent<PlayerMovement>().StopMovement)
         {
-
+            return;
+        }
+       
+        if (Input.GetMouseButton(1))
+        {
+            GetComponentInParent<PlayerMovement>().IsAiming = true;
             float HorizontalRotation = Input.GetAxis("Mouse X");
             float VericalRotation = Input.GetAxis("Mouse Y");
 
             ShotPoint.rotation = Quaternion.Euler(ShotPoint.rotation.eulerAngles +
                 new Vector3(0, 0, VericalRotation * rotationSpeed)); 
-            BlastPower = Mathf.Clamp(BlastPower + HorizontalRotation * rotationSpeed,5,10);
+            BlastPower = Mathf.Clamp(BlastPower + HorizontalRotation + VericalRotation * rotationSpeed,1,4);
             Debug.Log(HorizontalRotation * rotationSpeed);
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetMouseButtonDown(0))
             {
+                anim.Play("Throw", 1);
                 GameObject CreatedStone = Instantiate(Stone, ShotPoint.position, ShotPoint.rotation);
-                CreatedStone.GetComponent<Rigidbody>().velocity = ShotPoint.transform.right * BlastPower;
+                CreatedStone.GetComponent<Rigidbody>().velocity = GetComponent<ArcCreator>().Dir* BlastPower;
 
             }
+        }
+        else
+        {
+            GetComponentInParent<PlayerMovement>().IsAiming = false;
         }
     }
 }
