@@ -443,11 +443,17 @@ namespace Worq.AEAI.Enemy
                     agent.speed = runSpeed;
                 }
 
+                Debug.Log(agent.remainingDistance);
                 if (agent.remainingDistance <= distanceToAttackFrom)
                 {
                     //addition
-                    Time.timeScale = 0;
+                    //Time.timeScale = 0;
                     Debug.Log("PlayerDead Level Failed");
+                    player.GetComponent<PlayerMovement>().StopMovement = true;
+                    agent.isStopped = true;
+                    animator.Play("Throw");
+                    player.transform.position = transform.position;
+                    player.GetComponentInChildren<Animator>().Play("Thrown");
                     //
                     /*PlayShootAnim();
 

@@ -11,19 +11,14 @@ public class StoneCollision : MonoBehaviour
         if(other.tag == "Enemy")
         {
             Debug.Log("sleep" + other.transform.parent.name);
+            other.GetComponent<Animator>().SetBool("isHitBool", true);
             //make enemy sleep for some time
             other.enabled = false;
 
             other.GetComponent<NavMeshAgent>().isStopped = true;
             other.GetComponent<EnemyAI>().enabled = false;
-            GameObject.Find("GameManager").GetComponent<GameManager>().hitEnemies.Add(other.transform.parent.gameObject,true);
-            
-
+            GameObject.Find("GameManager").GetComponent<GameManager>().hitEnemies.Add(other.transform.parent.gameObject,true);            
         }
-
-        else
-        {
-            Destroy(gameObject, 2f);
-        }
+        Destroy(this.gameObject, 0.2f);
     }
 }
