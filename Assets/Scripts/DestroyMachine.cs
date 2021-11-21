@@ -18,7 +18,8 @@ public class DestroyMachine : MonoBehaviour
         {
             Debug.Log("Destroy mech");
             // for now destroy
-            Destroy(gameObject, 2f);
+            //GetComponent<Animator>().SetBool("Destroy", true);
+            GetComponent<Animator>().Play("Shake");
             
         }
     }
