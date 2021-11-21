@@ -100,7 +100,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: b2c50c84fcdf8f84886d00ad369c7c2c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -131,7 +131,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.09301758
+        value: 0.21249962
         inSlope: -0.17691031
         outSlope: -0.17691031
         tangentMode: 0
@@ -241,7 +241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71794fb6679a2654f94f0d869663acf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1.25
+  speed: 8
   StopMovement: 0
   IsAiming: 0
 --- !u!143 &4958824222318550051
@@ -261,7 +261,19 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.0001
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.17, z: 0}
+  m_Center: {x: 0, y: 0.18, z: 0}
+--- !u!114 &6410384397135530793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5192687250612426270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44b0a48c4523a1d42969b0513bed4dee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4958824221438978895
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -343,6 +355,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6fa311b4a1a7474182f21fe2a8b7d46, type: 3}
+--- !u!1 &5192687250612426270 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d6fa311b4a1a7474182f21fe2a8b7d46, type: 3}
+  m_PrefabInstance: {fileID: 4958824221438978895}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4853738170019499172 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d6fa311b4a1a7474182f21fe2a8b7d46, type: 3}

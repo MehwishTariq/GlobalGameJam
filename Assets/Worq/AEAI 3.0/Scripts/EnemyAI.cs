@@ -252,7 +252,7 @@ namespace Worq.AEAI.Enemy
             isWaiting = false;
 
             distanceToAttackFrom = Random.Range(minAttackDistance, maxAttackDistance);
-
+           
             anim = GetComponent<Animation>();
             if (anim == null)
                 anim = gameObject.AddComponent<Animation>();
@@ -445,7 +445,11 @@ namespace Worq.AEAI.Enemy
 
                 if (agent.remainingDistance <= distanceToAttackFrom)
                 {
-                    PlayShootAnim();
+                    //addition
+                    Time.timeScale = 0;
+                    Debug.Log("PlayerDead Level Failed");
+                    //
+                    /*PlayShootAnim();
 
                     Vector3 pointToLook = new Vector3(player.transform.position.x, transform.position.y,
                         player.transform.position.z);
@@ -453,7 +457,8 @@ namespace Worq.AEAI.Enemy
                     if (!playerIsDead && !hasFiredOne)
                     {
                         StartCoroutine(addShootingRandomness());
-                    }
+                    }*/     //addition commented
+
                 }
             }
         }

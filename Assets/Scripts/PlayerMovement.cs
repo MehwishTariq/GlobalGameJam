@@ -47,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
             Plane p = new Plane(Vector3.up, 0f);
             float Dist;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Debug.DrawRay(ray.origin,ray.direction,Color.red);
             if (p.Raycast(ray, out Dist) && Input.GetMouseButton(1))
             {
                 Vector3 Dir = ray.GetPoint(Dist) - transform.position;

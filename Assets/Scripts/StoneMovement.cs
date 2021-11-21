@@ -27,7 +27,6 @@ public class StoneMovement : MonoBehaviour
             ShotPoint.rotation = Quaternion.Euler(ShotPoint.rotation.eulerAngles +
                 new Vector3(0, 0, VericalRotation * rotationSpeed)); 
             BlastPower = Mathf.Clamp(BlastPower + HorizontalRotation + VericalRotation * rotationSpeed,1,4);
-            Debug.Log(HorizontalRotation * rotationSpeed);
             if (Input.GetMouseButtonDown(0))
             {
                 anim.Play("Throw", 1);
