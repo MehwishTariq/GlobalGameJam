@@ -10,7 +10,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject machineCanvas;
     public Dictionary<GameObject, bool> hitEnemies = new Dictionary<GameObject, bool>();
 
-    public bool stoneCollided { get; set; }
+    UIManager uicontrol;
+
     public int TotalMachines;
 
     public bool canDestroy { get; set; }
@@ -21,8 +22,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        stoneCollided = false;
-        machineCanvas.SetActive(false);
+        uicontrol = GameObject.Find("UIManager").GetComponent<UIManager>();
+         machineCanvas.SetActive(false);
     }
 
     IEnumerator WakeEnemyUp(GameObject enemy)
@@ -55,9 +56,9 @@ public class GameManager : MonoBehaviour
         if (TotalMachines == MachineDestroyed)
         {
             player.StopMovement = true;
-            Time.timeScale = 0;
             Debug.Log("LevelComplete");
             //Level complete screen show
+            StartCoroutine(uicontrol.LevelComplete());
         }
         else
         {

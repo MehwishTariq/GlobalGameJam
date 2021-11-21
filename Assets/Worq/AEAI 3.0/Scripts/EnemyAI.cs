@@ -447,7 +447,6 @@ namespace Worq.AEAI.Enemy
                 if (agent.remainingDistance <= distanceToAttackFrom)
                 {
                     //addition
-                    //Time.timeScale = 0;
                     Debug.Log("PlayerDead Level Failed");
                     player.GetComponent<PlayerMovement>().StopMovement = true;
                     agent.isStopped = true;
