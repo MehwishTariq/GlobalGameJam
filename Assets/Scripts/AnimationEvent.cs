@@ -12,6 +12,12 @@ public class AnimationEvent : MonoBehaviour
         Invoke("DestroyOff", 3f);
     }
 
+    public void levelfail() 
+    {
+
+        GameObject.Find("GameManager").GetComponent<GameManager>().failed = true;
+    }
+
     void DestroyOff()
     {
         GameObject.Find("GameManager").GetComponent<GameManager>().destroy = false;

@@ -453,6 +453,7 @@ namespace Worq.AEAI.Enemy
                     animator.Play("Throw");
                     player.transform.position = transform.position;
                     player.GetComponentInChildren<Animator>().Play("Thrown");
+                   
                     //
                     /*PlayShootAnim();
 
