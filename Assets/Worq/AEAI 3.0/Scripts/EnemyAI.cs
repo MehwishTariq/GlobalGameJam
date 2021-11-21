@@ -443,6 +443,7 @@ namespace Worq.AEAI.Enemy
                     agent.speed = runSpeed;
                 }
 
+                Debug.Log(agent.remainingDistance);
                 if (agent.remainingDistance <= distanceToAttackFrom)
                 {
                     //addition
@@ -452,7 +453,6 @@ namespace Worq.AEAI.Enemy
                     animator.Play("Throw");
                     player.transform.position = transform.position;
                     player.GetComponentInChildren<Animator>().Play("Thrown");
-                    
                     //
                     /*PlayShootAnim();
 

@@ -29,9 +29,10 @@ public class GameManager : MonoBehaviour
     IEnumerator WakeEnemyUp(GameObject enemy)
     {
         Debug.Log("hello");
-        yield return new WaitForSeconds(20f);
+        yield return new WaitForSeconds(10f);
         Debug.Log("hello2");
         enemy.GetComponentInChildren<NavMeshAgent>().isStopped = false;
+        enemy.GetComponentInChildren<Animator>().SetBool("isHitBool", false);
         enemy.GetComponentInChildren<EnemyAI>().enabled = true;
         enemy.GetComponentInChildren<CapsuleCollider>().enabled = true;
     }
