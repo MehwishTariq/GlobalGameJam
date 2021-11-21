@@ -10,6 +10,7 @@ public class StoneCollision : MonoBehaviour
     {
         if(other.tag == "Enemy")
         {
+            GetComponent<AudioSource>().Play();
             Debug.Log("sleep" + other.transform.parent.name);
             other.GetComponent<Animator>().SetBool("isHitBool", true);
             //make enemy sleep for some time

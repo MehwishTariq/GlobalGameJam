@@ -8,9 +8,7 @@ using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour
 {
     public List<RectTransform> uipanels = new List<RectTransform>();
-    public List<Image> buttons = new List<Image>();
-
-
+    
     private void Start()
     {
         Time.timeScale = 1;
@@ -43,22 +41,16 @@ public class UIManager : MonoBehaviour
         uipanels[2].gameObject.SetActive(true);
         yield return new WaitForSeconds(0.2f);
         uipanels[2].GetChild(0).GetComponent<Text>().DOFade(1, 0.3f);
-        for (int i = 1; i < uipanels[1].childCount; i++)
-        {
-            uipanels[2].GetChild(i).GetComponent<RectTransform>().DOAnchorPosX(238, 0.5f);
-        }
+        
     }
 
     public IEnumerator LevelFail()
     {
         DisablePanels();
+        yield return new WaitForSecondsRealtime(2f);
+        Time.timeScale = 0;
         uipanels[3].gameObject.SetActive(true);
-        yield return new WaitForSeconds(0.2f);
-        uipanels[3].GetChild(0).GetComponent<Text>().DOFade(1, 0.3f);
-        for (int i = 1; i < uipanels[1].childCount; i++)
-        {
-            uipanels[3].GetChild(i).GetComponent<RectTransform>().DOAnchorPosX(238, 0.5f);
-        }
+
     }
 
     void DisablePanels()
@@ -70,19 +62,23 @@ public class UIManager : MonoBehaviour
     }
     public void OpenPanel(int i)
     {
+        Debug.Log("open");
         DisablePanels();
         uipanels[i].gameObject.SetActive(true);
+        Time.timeScale = 0;
+
     }
-    
+
     public void Restart()
     {
         SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
     }
    
-    
+   
+
     public void Play()
     {
-        if(SceneManager.GetActiveScene().buildIndex + 1 == 3)
+        if(SceneManager.GetActiveScene().buildIndex + 1 == 4)
             SceneManager.LoadSceneAsync(0);
         else
             SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);

@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
 
     public int TotalMachines;
 
+    public bool failed { get; set; }
     public bool canDestroy { get; set; }
     public bool destroy { get; set; }
 
@@ -62,6 +63,11 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            if (failed)
+            {
+                StartCoroutine(GameObject.Find("UIManager").GetComponent<UIManager>().LevelFail());
+                failed = false;
+            }
             
             if (canDestroy)
             {
