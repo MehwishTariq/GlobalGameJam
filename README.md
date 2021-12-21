@@ -4,3 +4,4 @@ Game made on the basis of theme provided by the Cultural Heritage Game Jam on it
 
 https://itch.io/jam/cultural-heritage-game-jam
 
+This was a team work.
