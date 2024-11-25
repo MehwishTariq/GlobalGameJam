@@ -6,4 +6,8 @@ Submitted to a game jam “Cultural Heritage Game Jam” on itch.io. The theme i
 
 https://itch.io/jam/cultural-heritage-game-jam
 
+The Game Link is below:
+
+https://itch.io/jam/cultural-heritage-game-jam/rate/1287135
+
 This was a team work.
